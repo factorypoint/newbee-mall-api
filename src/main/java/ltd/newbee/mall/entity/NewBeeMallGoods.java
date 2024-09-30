@@ -11,6 +11,7 @@ package ltd.newbee.mall.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -27,9 +28,9 @@ public class NewBeeMallGoods {
 
     private String goodsCarousel;
 
-    private Integer originalPrice;
+    private BigDecimal originalPrice;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
     private Integer stockNum;
 

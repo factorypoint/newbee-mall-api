@@ -13,7 +13,7 @@ Copyright (c) 2019-2021 十三 all rights reserved.
         <id column="order_id" jdbcType="BIGINT" property="orderId"/>
         <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
-        <result column="total_price" jdbcType="INTEGER" property="totalPrice"/>
+        <result column="total_price" jdbcType="NUMERIC" property="totalPrice"/>
         <result column="pay_status" jdbcType="TINYINT" property="payStatus"/>
         <result column="pay_type" jdbcType="TINYINT" property="payType"/>
         <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>

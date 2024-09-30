@@ -40,9 +40,9 @@ public class NewBeeMallPersonalAPI {
     @PostMapping("/user/login")
     @ApiOperation(value = "登录接口", notes = "返回token")
     public Result<String> login(@RequestBody @Valid MallUserLoginParam mallUserLoginParam) {
-        if (!NumberUtil.isPhone(mallUserLoginParam.getLoginName())){
-            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
-        }
+//        if (!NumberUtil.isPhone(mallUserLoginParam.getLoginName())){
+//            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
+//        }
         String loginResult = newBeeMallUserService.login(mallUserLoginParam.getLoginName(), mallUserLoginParam.getPasswordMd5());
 
         logger.info("login api,loginName={},loginResult={}", mallUserLoginParam.getLoginName(), loginResult);
@@ -77,9 +77,9 @@ public class NewBeeMallPersonalAPI {
     @PostMapping("/user/register")
     @ApiOperation(value = "用户注册", notes = "")
     public Result register(@RequestBody @Valid MallUserRegisterParam mallUserRegisterParam) {
-        if (!NumberUtil.isPhone(mallUserRegisterParam.getLoginName())){
-            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
-        }
+//        if (!NumberUtil.isPhone(mallUserRegisterParam.getLoginName())){
+//            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
+//        }
         String registerResult = newBeeMallUserService.register(mallUserRegisterParam.getLoginName(), mallUserRegisterParam.getPassword());
 
         logger.info("register api,loginName={},loginResult={}", mallUserRegisterParam.getLoginName(), registerResult);

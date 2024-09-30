@@ -28,6 +28,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +112,7 @@ public class NewBeeMallShoppingCartAPI {
         if (cartItemIds.length < 1) {
             NewBeeMallException.fail("参数异常");
         }
-        int priceTotal = 0;
+        BigDecimal priceTotal = BigDecimal.ZERO;
         List<NewBeeMallShoppingCartItemVO> itemsForSettle = newBeeMallShoppingCartService.getCartItemsForSettle(Arrays.asList(cartItemIds), loginMallUser.getUserId());
         if (CollectionUtils.isEmpty(itemsForSettle)) {
             //无数据则抛出异常
@@ -119,9 +120,10 @@ public class NewBeeMallShoppingCartAPI {
         } else {
             //总价
             for (NewBeeMallShoppingCartItemVO newBeeMallShoppingCartItemVO : itemsForSettle) {
-                priceTotal += newBeeMallShoppingCartItemVO.getGoodsCount() * newBeeMallShoppingCartItemVO.getSellingPrice();
+                BigDecimal goodsCount = new BigDecimal(newBeeMallShoppingCartItemVO.getGoodsCount());
+                priceTotal = priceTotal.add(newBeeMallShoppingCartItemVO.getSellingPrice().multiply(goodsCount));
             }
-            if (priceTotal < 1) {
+            if (priceTotal.compareTo(new BigDecimal("0.001")) < 0) {
                 NewBeeMallException.fail("价格异常");
             }
         }

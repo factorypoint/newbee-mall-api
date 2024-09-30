@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 订单详情页页面订单项VO
@@ -32,5 +33,5 @@ public class NewBeeMallOrderItemVO implements Serializable {
     private String goodsCoverImg;
 
     @ApiModelProperty("商品价格")
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 }

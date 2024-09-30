@@ -12,10 +12,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
 
 @Data
 public class GoodsEditParam {
@@ -46,15 +44,15 @@ public class GoodsEditParam {
 
     @ApiModelProperty("originalPrice")
     @NotNull(message = "originalPrice不能为空")
-    @Min(value = 1, message = "originalPrice最低为1")
-    @Max(value = 1000000, message = "originalPrice最高为1000000")
-    private Integer originalPrice;
+    @DecimalMin(value = "0.001", message = "originalPrice最低为0.001")
+    @DecimalMax(value = "1000000", message = "originalPrice最高为1000000")
+    private BigDecimal originalPrice;
 
     @ApiModelProperty("sellingPrice")
     @NotNull(message = "sellingPrice不能为空")
-    @Min(value = 1, message = "sellingPrice最低为1")
-    @Max(value = 1000000, message = "sellingPrice最高为1000000")
-    private Integer sellingPrice;
+    @DecimalMin(value = "0.001", message = "sellingPrice最低为0.001")
+    @DecimalMax(value = "1000000", message = "sellingPrice最高为1000000")
+    private BigDecimal sellingPrice;
 
     @ApiModelProperty("库存")
     @NotNull(message = "库存不能为空")

@@ -10,6 +10,7 @@ package ltd.newbee.mall.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -24,7 +25,7 @@ public class NewBeeMallOrderItem {
 
     private String goodsCoverImg;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
     private Integer goodsCount;
 

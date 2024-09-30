@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 首页配置商品VO
@@ -28,7 +29,7 @@ public class NewBeeMallIndexConfigGoodsVO implements Serializable {
     @ApiModelProperty("商品图片地址")
     private String goodsCoverImg;
     @ApiModelProperty("商品价格")
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
     @ApiModelProperty("商品标签")
     private String tag;
 }

@@ -10,6 +10,7 @@ package ltd.newbee.mall.api.mall.param;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -22,9 +23,11 @@ public class MallUserLoginParam implements Serializable {
 
     @ApiModelProperty("登录名")
     @NotEmpty(message = "登录名不能为空")
+    @Length(min = 5, max = 16, message = "The username is invalid. Please enter a username that is between 5 and 16 characters long.")
     private String loginName;
 
     @ApiModelProperty("用户密码(需要MD5加密)")
     @NotEmpty(message = "密码不能为空")
+    @Length(min = 6, max = 32, message = "The password is invalid. Please enter a username that is between 6 and 32 characters long.")
     private String passwordMd5;
 }

@@ -32,6 +32,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +53,7 @@ public class NewBeeMallOrderAPI {
     @PostMapping("/saveOrder")
     @ApiOperation(value = "生成订单接口", notes = "传参为地址id和待结算的购物项id数组")
     public Result<String> saveOrder(@ApiParam(value = "订单参数") @RequestBody SaveOrderParam saveOrderParam, @TokenToMallUser MallUser loginMallUser) {
-        int priceTotal = 0;
+        BigDecimal priceTotal = BigDecimal.ZERO;
         if (saveOrderParam == null || saveOrderParam.getCartItemIds() == null || saveOrderParam.getAddressId() == null) {
             NewBeeMallException.fail(ServiceResultEnum.PARAM_ERROR.getResult());
         }
@@ -66,9 +67,10 @@ public class NewBeeMallOrderAPI {
         } else {
             //总价
             for (NewBeeMallShoppingCartItemVO newBeeMallShoppingCartItemVO : itemsForSave) {
-                priceTotal += newBeeMallShoppingCartItemVO.getGoodsCount() * newBeeMallShoppingCartItemVO.getSellingPrice();
+                BigDecimal goodsCount = new BigDecimal(newBeeMallShoppingCartItemVO.getGoodsCount());
+                priceTotal =priceTotal.add(newBeeMallShoppingCartItemVO.getSellingPrice().multiply(goodsCount));
             }
-            if (priceTotal < 1) {
+            if (priceTotal.compareTo(new BigDecimal("0.001")) < 0) {
                 NewBeeMallException.fail("价格异常");
             }
             MallUserAddress address = newBeeMallUserAddressService.getMallUserAddressById(saveOrderParam.getAddressId());
